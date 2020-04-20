@@ -1,11 +1,13 @@
-document.querySelectorAll('.drum').forEach((button, index) => {
+document.querySelectorAll('.drum').forEach((button) => {
   button.addEventListener('click', function () {
     let buttonInnerHTML = this.innerHTML;
     playSound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
   });
 });
 document.addEventListener('keydown', function (e) {
   playSound(e.key);
+  buttonAnimation(e.key);
 });
 
 function playSound(element) {
@@ -37,4 +39,11 @@ function playSound(element) {
       break;
   }
   audioFile.play();
+}
+function buttonAnimation(key) {
+  let buttonPressed = document.querySelector('.' + key);
+  buttonPressed.classList.add('pressed');
+  setTimeout(() => {
+    buttonPressed.classList.remove('pressed');
+  }, 250);
 }
